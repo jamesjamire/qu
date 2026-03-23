@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "Influencer": {
+      "title": "Influencer",
+      "description": "An influencer profile with metrics and ranking data.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID for the influencer." },
+        "name": { "type": "string", "description": "Full name or display name." },
+        "handle": { "type": "string", "description": "Social media handle." },
+        "platform": { "type": "string", "enum": ["instagram", "youtube"], "description": "Platform the influencer is primarily on." },
+        "followerCount": { "type": "number", "description": "Total number of followers or subscribers." },
+        "engagementRate": { "type": "number", "description": "Average engagement rate (percentage)." },
+        "postFrequency": { "type": "number", "description": "Average posts per week." },
+        "niche": { "type": "array", "items": { "type": "string" }, "description": "Categories or niche tags." },
+        "location": { "type": "string", "description": "Country or city (e.g., Tanzania, Kenya)." },
+        "score": { "type": "number", "description": "AI-calculated overall score (0-100)." },
+        "lastUpdated": { "type": "string", "format": "date-time", "description": "Last time data was refreshed." },
+        "avatarUrl": { "type": "string", "description": "Profile picture URL." },
+        "bio": { "type": "string", "description": "Short biography." },
+        "growthTrajectory": { "type": "number", "description": "Follower growth rate (percentage)." },
+        "authenticityScore": { "type": "number", "description": "AI-calculated audience authenticity (0-100)." },
+        "consistencyScore": { "type": "number", "description": "AI-calculated content consistency (0-100)." }
+      },
+      "required": ["id", "name", "handle", "platform", "followerCount", "score"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user of the platform (brand or agency).",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID." },
+        "email": { "type": "string", "description": "User email address." },
+        "displayName": { "type": "string", "description": "User display name." },
+        "role": { "type": "string", "enum": ["brand", "admin"], "description": "User role." }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/influencers/{influencerId}": {
+      "schema": "Influencer",
+      "description": "Collection of influencer profiles."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profiles."
+    }
+  }
+}
